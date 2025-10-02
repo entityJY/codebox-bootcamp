@@ -19,17 +19,41 @@ export default function Home() {
             <input name="information" type="text" id="info" class="searchField"/>
             <p/>
             <button onClick={test}>Submit information</button>
+            <p/>
+                Previous 5 messages:
+            <p/>
+            <p id="first.message"> Empty </p>
+            <p id="second.message"> Empty </p>
+            <p id="third.message"> Empty </p>
+            <p id="fourth.message"> Empty </p>
+            <p id="fifth.message"> Empty </p>
+            <p this is version two/>
         </main>
     );
 }
 
+async function get_recent_messages() {
+    const { data, error } = await supabase
+        .from('information')
+        .select("*")
+        .order('id', { ascending: false})
+        .limit(5)
+    console.log(data[0].string)
+    document.getElementById("first.message").setAttribute("value", data[0].string)
+    document.getElementById("second.message").setAttribute("value", data[1].string)
+    document.getElementById("third.message").setAttribute("value", data[2].string)
+    document.getElementById("fourth.message").setAttribute("value", data[3].string)
+    document.getElementById("fifth.message").setAttribute("value", data[4].string)
+}
+
 async function test(){
-    var info = document.getElementById('info').value
-    console.log(info)
+    var info = document.getElementById('info')
     const { data, count } = supabase
-        .from('countries')
+        .from('information')
         .select('*', { count: 'exact', head: true })
     const { error } = await supabase
         .from('information')
-        .insert({ id: count, string: info })
+        .insert({ id: count, string: info.value })
+    info.setAttribute("value", "")
+    get_recent_messages()
 }
