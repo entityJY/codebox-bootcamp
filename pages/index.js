@@ -26,7 +26,10 @@ export default function Home() {
 async function test(){
     var info = document.getElementById('info').value
     console.log(info)
+    const { data, count } = supabase
+        .from('countries')
+        .select('*', { count: 'exact', head: true })
     const { error } = await supabase
-  .from('information')
-  .insert({ id: 1, string: info })
+        .from('information')
+        .insert({ id: count, string: info })
 }
