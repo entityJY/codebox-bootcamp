@@ -27,6 +27,6 @@ async function test(){
     var searchField = document.getElementById('info').value
     console.log(searchField)
     const { error } = await supabase
-  .from('information')
+  .from('public/information')
   .insert({ id: 1, string: searchField })
 }
