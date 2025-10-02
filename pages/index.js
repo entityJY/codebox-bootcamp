@@ -24,9 +24,9 @@ export default function Home() {
 }
 
 async function test(){
-    var searchField = document.getElementById('info').value
-    console.log(searchField)
+    var info = document.getElementById('info').value
+    console.log(info)
     const { error } = await supabase
-  .from('public/information')
-  .insert({ id: 1, string: searchField })
+  .from('information')
+  .insert({ id: 1, string: info })
 }
