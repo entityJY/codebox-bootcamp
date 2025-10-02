@@ -1,4 +1,5 @@
 import supabase from "../supabaseClient";
+import Wave from 'react-wavify'
 
 export default function Home() {
     return (
@@ -27,7 +28,17 @@ export default function Home() {
             <p id="third.message"> Empty </p>
             <p id="fourth.message"> Empty </p>
             <p id="fifth.message"> Empty </p>
-            <p this is version two/>
+            <Wave 
+                fill='#34b2f0ff'
+                paused={false}
+                style={{ display: 'flex' }}
+                options={{
+                    height: 50,
+                    amplitude: 20,
+                    speed: 0.3,
+                    points: 9
+                }}
+            />
         </main>
     );
 }
